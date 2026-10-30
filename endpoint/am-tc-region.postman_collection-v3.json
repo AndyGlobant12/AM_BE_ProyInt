@@ -1,0 +1,633 @@
+{
+  "info": {
+    "_postman_id": "a4577d5b-1a01-4cd2-a0ab-b2e1d5c29be9",
+    "name": "am-tc-region",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46625903",
+    "_collection_link": "https://go.postman.co/collection/46625903-a4577d5b-1a01-4cd2-a0ab-b2e1d5c29be9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ManagementInfo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{am-tc-region-dev}}/tc/region/management/info",
+          "host": [
+            "{{am-tc-region-dev}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "management",
+            "info"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RegionByRouteTc-Ok",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Is valid response with json array in body\", function () {\r",
+              "    // assert that the status code is 200\r",
+              "    pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants\r",
+              "     \r",
+              "    // assert that the response has a valid JSON body\r",
+              "    pm.response.to.be.withBody;\r",
+              "     \r",
+              "    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
+              "     \r",
+              "    //make sure we have a valid json object\r",
+              "    pm.expect(pm.response.json()).to.be.an('object').but.not.an('array');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"The response has all properties\", () => {\r",
+              "    //parse the response JSON and test three properties\r",
+              "    const responseJson = pm.response.json();\r",
+              "    console.info(\"response: \", responseJson);\r",
+              "   pm.expect(responseJson.regionCode).to.be.an('string');\r",
+              "   pm.expect(responseJson.entity).to.be.an('string');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Is response time is less than 300 ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Status code is 200\", () => {\r",
+              "  pm.expect(pm.response.code).to.eql(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          },
+          {
+            "key": "departure",
+            "value": "MEX",
+            "type": "text"
+          },
+          {
+            "key": "arrival",
+            "value": "LAX",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{am-tc-region-dev}}/tc/region/regionByRoute",
+          "host": [
+            "{{am-tc-region-dev}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByRoute"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RegionByRouteTc-Bad-Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Is valid response with json array in body\", function () {\r",
+              "      // assert that the response has a valid JSON body\r",
+              "    pm.response.to.be.withBody;\r",
+              "     \r",
+              "    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
+              "     \r",
+              "    //make sure we have a valid json object\r",
+              "    pm.expect(pm.response.json()).to.be.an('object').but.not.an('array');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"The response has all properties\", () => {\r",
+              "    //parse the response JSON and test three properties\r",
+              "    const responseJson = pm.response.json();\r",
+              "    console.info(\"response: \", responseJson);\r",
+              "   pm.expect(responseJson.channel).to.be.an('string');\r",
+              "   pm.expect(responseJson.httpCode).to.be.an('number');\r",
+              "   pm.expect(responseJson.reason).to.be.an('string');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Status code is 400\", () => {\r",
+              "  pm.expect(pm.response.code).to.eql(400);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          },
+          {
+            "key": "departure",
+            "value": "MEX",
+            "type": "text"
+          },
+          {
+            "key": "arrival",
+            "value": "CUN",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{am-tc-region-host}}/tc/region/regionByRoute",
+          "host": [
+            "{{am-tc-region-host}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByRoute"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RegionByRouteTc-Empty-Response",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Is valid response with json array in body\", function () {\r",
+              "      // assert that the response has a valid JSON body\r",
+              "    pm.response.to.be.withBody;\r",
+              "     \r",
+              "    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
+              "     \r",
+              "    //make sure we have a valid json object\r",
+              "    pm.expect(pm.response.json()).to.be.an('object').but.not.an('array');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"The response has all properties\", () => {\r",
+              "    //parse the response JSON and test three properties\r",
+              "    const responseJson = pm.response.json();\r",
+              "    console.info(\"response: \", responseJson);\r",
+              "    const error= 'ERR.TC.REGION.EMPTY_RESPONSE';\r",
+              "   pm.expect(responseJson.channel).to.be.an('string');\r",
+              "   pm.expect(responseJson.httpCode).to.be.an('number');\r",
+              "   pm.expect(responseJson.reason).to.be.an('string');\r",
+              "   pm.expect(responseJson.reason).to.eq(error);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Status code is 500\", () => {\r",
+              "  pm.expect(pm.response.code).to.eql(500);\r",
+              "  \r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          },
+          {
+            "key": "departure",
+            "value": "ZZZ",
+            "type": "text"
+          },
+          {
+            "key": "arrival",
+            "value": "CUN",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{am-tc-region-host}}/tc/region/regionByRoute",
+          "host": [
+            "{{am-tc-region-host}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByRoute"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "post region By List",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Is valid response with json array in body\", function () {\r",
+              "      // assert that the response has a valid JSON body\r",
+              "    pm.response.to.be.withBody;\r",
+              "     \r",
+              "    pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed\r",
+              "     \r",
+              "    //make sure we have a valid json object\r",
+              "    pm.expect(pm.response.json()).to.be.an('object').but.not.an('array');\r",
+              "});\r",
+              "\r",
+              "pm.test(\"The response has all properties\", () => {\r",
+              "    //parse the response JSON and test three properties\r",
+              "    const responseJson = pm.response.json();\r",
+              "    console.info(\"response: \", responseJson);\r",
+              "    const error= 'ERR.TC.REGION.EMPTY_RESPONSE';\r",
+              "   pm.expect(responseJson.channel).to.be.an('string');\r",
+              "   pm.expect(responseJson.httpCode).to.be.an('number');\r",
+              "   pm.expect(responseJson.reason).to.be.an('string');\r",
+              "   pm.expect(responseJson.reason).to.eq(error);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Status code is 500\", () => {\r",
+              "  pm.expect(pm.response.code).to.eql(500);\r",
+              "  \r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"routes\": [\n    {\n      \"departure\": \"GDL\",\n      \"arrival\": \"EZE\"\n    },\n    {\n      \"departure\": \"EZE\",\n      \"arrival\": \"GDL\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{am-tc-region-dev}}/tc/region/regionByList",
+          "host": [
+            "{{am-tc-region-dev}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByList"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "post region By List pruebas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Verificar que la respuesta sea exitosa\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 304]);",
+              "});",
+              "",
+              "pm.test(\"Verificar encabezados de caché\", function () {",
+              "    pm.expect(pm.response.headers.has(\"Cache-Control\")).to.be.true;",
+              "    pm.expect(pm.response.headers.get(\"Cache-Control\")).to.include(\"max-age\");",
+              "});",
+              "",
+              "console.log(\"Cuerpo de la respuesta:\", pm.response.json());"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Pre-request Script",
+              "// Inicializa el contador de peticiones",
+              "if (!pm.environment.get(\"requestCount\")) {",
+              "    pm.environment.set(\"requestCount\", 0);",
+              "}",
+              "",
+              "// Incrementa el contador",
+              "let count = pm.environment.get(\"requestCount\") + 1;",
+              "pm.environment.set(\"requestCount\", count);",
+              "",
+              "// Imprime el número de la petición actual",
+              "console.log(`Enviando petición número: ${count}`);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableCookies": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"routes\": [\n    {\n      \"departure\": \"BSB\",\n      \"arrival\": \"ATH\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{am-tc-region-dev}}/tc/region/regionByList",
+          "host": [
+            "{{am-tc-region-dev}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByList"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "post region By List pruebas NEGATIVOS",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Verificar que la respuesta sea exitosa\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 304]);",
+              "});",
+              "",
+              "pm.test(\"Verificar encabezados de caché\", function () {",
+              "    pm.expect(pm.response.headers.has(\"Cache-Control\")).to.be.true;",
+              "    pm.expect(pm.response.headers.get(\"Cache-Control\")).to.include(\"max-age\");",
+              "});",
+              "",
+              "console.log(\"Cuerpo de la respuesta:\", pm.response.json());"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Pre-request Script",
+              "// Inicializa el contador de peticiones",
+              "if (!pm.environment.get(\"requestCount\")) {",
+              "    pm.environment.set(\"requestCount\", 0);",
+              "}",
+              "",
+              "// Incrementa el contador",
+              "let count = pm.environment.get(\"requestCount\") + 1;",
+              "pm.environment.set(\"requestCount\", count);",
+              "",
+              "// Imprime el número de la petición actual",
+              "console.log(`Enviando petición número: ${count}`);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableCookies": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-transactionId",
+            "value": "abc65970-5152-4dbb-8c1d-2661a4c2c054",
+            "type": "text"
+          },
+          {
+            "key": "channel",
+            "value": "web",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"routes\": [\n    {\n      \"departure\": \"ccc\",\n      \"arrival\": \"MEX\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{am-tc-region-dev}}/tc/region/regionByList",
+          "host": [
+            "{{am-tc-region-dev}}"
+          ],
+          "path": [
+            "tc",
+            "region",
+            "regionByList"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "am-tc-region-dev",
+      "value": "https://amx-c-mtpsbk-de.amlab7.com"
+    },
+    {
+      "key": "am-tc-region-local",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "am-tc-region-qa",
+      "value": "https://amx-c-mtpsbk-q.amlab7.com"
+    },
+    {
+      "key": "am-tc-region-prod",
+      "value": ""
+    }
+  ]
+}

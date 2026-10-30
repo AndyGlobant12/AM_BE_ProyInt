@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Fallos de contrato (status code)",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*[Ss]tatus.*"
+  },
+  {
+    "name": "Fallos de aserción de datos",
+    "matchedStatuses": ["failed"]
+  },
+  {
+    "name": "Problemas de infraestructura / red",
+    "matchedStatuses": ["broken"]
+  }
+]

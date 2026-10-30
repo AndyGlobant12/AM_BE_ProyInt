@@ -1,0 +1,49 @@
+# ===== Maven / Java =====
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# ===== Allure =====
+allure-results/
+allure-report/
+.allure/
+
+# ===== Playwright for Java =====
+# Navegadores y caché descargados por Playwright
+.cache/
+playwright-report/
+test-results/
+
+# ===== IDEs / Editores =====
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# NetBeans
+nbproject/
+nbactions.xml
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Credenciales / entorno local =====
+*.env
+.env
+*.local
